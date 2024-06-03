@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#pizza {
+  transition: transform 0.1s;
+}
+
+#pizza:hover {
+  transform: rotate(5deg);
+}
+
+#pizza:active {
+  transform: rotate(-5deg);
+}
+
+#hud {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#particles {
+  position: absolute;
+  pointer-events: none;
+}
+
+.number {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  animation: float 1s ease-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<h2>Peppino's Pizza Clicker</h2>
+
+<p>Click the pizza to earn money:</p>
+
+<img id="pizza" src="pizza.png" onclick="earnMoney(event)" style="width:200px;height:200px;">
+
+<p id="moneyCounter">0</p>
+
+<h2>Store</h2>
+
+<button onclick="buyUpgrade()">Buy Upgrade (Cost: 10)</button>
+
+<img id="hud" src="idle.gif">
+
+<div id="particles"></div>
+
+<script>
+var money = 0;
+var moneyPerClick = 1;
+
+function earnMoney(event) {
+  money += moneyPerClick;
+  document.getElementById("moneyCounter").innerHTML = money;
+
+  var x = event.clientX;
+  var y = event.clientY;
+  var number = document.createElement("div");
+  number.className = "number";
+  number.style.left = x + "px";
+  number.style.top = y + "px";
+  number.innerHTML = "+" + moneyPerClick;
+  document.body.appendChild(number);
+
+  var particle = document.createElement("img");
+  particle.src = "coin.gif";
+  particle.style.left = x + "px";
+  particle.style.top = y + "px";
+  document.getElementById("particles").appendChild(particle);
+}
+
+function buyUpgrade() {
+  if (money >= 10) {
+    money -= 10;
+    moneyPerClick += 1;
+    document.getElementById("moneyCounter").innerHTML = money;
+  } else {
+    alert("You don't have enough money to buy this upgrade!");
+  }
+}
+</script>
+
+</body>
+</html>

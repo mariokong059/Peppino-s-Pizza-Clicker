@@ -1,0 +1,52 @@
+body {
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#game {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: auto;
+}
+
+#hud {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#pizza {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.1s;
+}
+
+#pizza:hover {
+  transform: translateX(-50%) rotate(5deg);
+}
+
+#pizza:active {
+  transform: translateX(-50%) rotate(-5deg);
+}
+
+#particles {
+  position: absolute;
+  pointer-events: none;
+}
+
+.number {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  animation: float 1s ease-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); opacity: 0; }
+}
